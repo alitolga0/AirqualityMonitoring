@@ -5,7 +5,9 @@ import com.airquality.airquality_monitoring.dto.AirQualityResponse;
 import com.airquality.airquality_monitoring.model.Anomaly;
 import com.airquality.airquality_monitoring.model.AirQualityRecord;
 import com.airquality.airquality_monitoring.service.AirQualityService;
+import com.airquality.airquality_monitoring.service.KafkaProducerService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,16 +15,28 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/airquality")
-@RequiredArgsConstructor
 public class AirQualityController {
 
     private final AirQualityService airQualityService;
+    private final KafkaProducerService kafkaProducerService;
+
+    @Autowired
+    public  AirQualityController(AirQualityService airQualityService, KafkaProducerService kafkaProducerService){
+        this.airQualityService = airQualityService;
+        this.kafkaProducerService = kafkaProducerService;
+    }
 
     // Veri kaydetme — manuel ve otomatik script'ler için
     @PostMapping
     public ResponseEntity<AirQualityRecord> saveAirQuality(@RequestBody AirQualityRequest request) {
         AirQualityRecord savedRecord = airQualityService.saveAirQualityData(request);
         return ResponseEntity.ok(savedRecord);
+    }
+
+    @PostMapping("/autoSaveAirQuality")
+    public ResponseEntity autoSaveAirQuality(@RequestBody AirQualityRequest request) {
+        kafkaProducerService.sendAirQualityData(request);
+        return ResponseEntity.ok(true);
     }
 
     // Belirli bir konum için hava kalitesi verilerini getirme
@@ -34,6 +48,7 @@ public class AirQualityController {
         List<AirQualityResponse> data = airQualityService.getAirQualityDataByLocation(latitude, longitude);
         return ResponseEntity.ok(data);
     }
+
 
     // Anomalileri listeleme (isteğe bağlı zaman aralığı)
     @GetMapping("/anomalies")

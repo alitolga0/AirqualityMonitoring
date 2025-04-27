@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 public interface AirQualityRepository extends JpaRepository<AirQualityRecord, Long> {
@@ -12,4 +13,5 @@ public interface AirQualityRepository extends JpaRepository<AirQualityRecord, Lo
     List<AirQualityRecord> findByLatitudeAndLongitudeAndRecordedAtBetween(double latitude, double longitude, LocalDateTime start, LocalDateTime end);
 
     List<AirQualityRecord> findByLatitudeAndLongitude(double latitude, double longitude);
+    boolean existsByMessageId(UUID messageId);
 }

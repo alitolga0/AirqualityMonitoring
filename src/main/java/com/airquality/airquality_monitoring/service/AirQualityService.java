@@ -24,6 +24,11 @@ public class AirQualityService {
 
     // Request -> Entity mapleyip kaydediyoruz
     public AirQualityRecord saveAirQualityData(AirQualityRequest request) {
+        if (airQualityRepository.existsByMessageId(request.getMessageId())) {
+            System.out.println("Duplicate message detected, skipping: " + request.getMessageId());
+            return null; // Zaten işlenmiş
+        }
+
         AirQualityRecord record = new AirQualityRecord();
         record.setLatitude(request.getLatitude());
         record.setLongitude(request.getLongitude());
@@ -33,7 +38,7 @@ public class AirQualityService {
         record.setSo2(request.getSo2());
         record.setO3(request.getO3());
         record.setRecordedAt(LocalDateTime.now());
-
+        record.setMessageId(request.getMessageId());
         AirQualityRecord savedRecord = airQualityRepository.save(record);
 
         // Anomali kontrolü

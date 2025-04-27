@@ -2,8 +2,11 @@ package com.airquality.airquality_monitoring.dto;
 
 import lombok.Data;
 
+import java.util.UUID;
+
 @Data
 public class AirQualityRequest {
+    private UUID messageId;
     private double latitude;
     private double longitude;
 
