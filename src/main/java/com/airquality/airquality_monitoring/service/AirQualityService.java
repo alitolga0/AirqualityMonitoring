@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -50,8 +51,8 @@ public class AirQualityService {
     // Anomali listesi (isteğe bağlı tarih aralığı)
     public List<Anomaly> getAnomalies(String startTime, String endTime) {
         if (startTime != null && endTime != null) {
-            LocalDateTime start = LocalDateTime.parse(startTime);
-            LocalDateTime end = LocalDateTime.parse(endTime);
+            LocalDateTime start = LocalDateTime.parse(startTime, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+            LocalDateTime end = LocalDateTime.parse(endTime, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
             return anomalyRepository.findByDetectedAtBetween(start, end);
         } else {
             return anomalyRepository.findAll();
