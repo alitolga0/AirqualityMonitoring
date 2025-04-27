@@ -9,6 +9,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 @Service
@@ -22,6 +23,7 @@ public class KafkaProducerService {
     private final KafkaTemplate<String, AirQualityRequest> kafkaTemplate;
 
     public void sendAirQualityData(AirQualityRequest data) {
+        data.setMessageId(UUID.randomUUID());
         CompletableFuture<SendResult<String, AirQualityRequest>> future = kafkaTemplate.send(topicName,data);
         future.whenComplete((result, ex) -> {
             if (ex == null) {

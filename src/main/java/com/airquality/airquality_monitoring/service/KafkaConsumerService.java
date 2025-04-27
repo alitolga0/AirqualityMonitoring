@@ -17,8 +17,8 @@ public class KafkaConsumerService {
 
     @KafkaListener(topics = "air-quality-events", groupId = "airquality-group")
     public void consume(AirQualityRequest data) {
-        System.out.println("Received Message in group foo: " + data);
-        var record = airQualityService.saveAirQualityData(data);
+        System.out.println("Received Message in group airquality-group: " + data);
+        airQualityService.saveAirQualityData(data);
     }
 
     @KafkaListener(topics = "topicName")
@@ -26,8 +26,7 @@ public class KafkaConsumerService {
             @Payload String message,
             @Header(KafkaHeaders.RECEIVED_PARTITION) int partition) {
         System.out.println(
-                "Received Message: " + message
-                        + "from partition: " + partition);
+                "Received Message: " + message + "from partition: " + partition);
     }
 }
 
