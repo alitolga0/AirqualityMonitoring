@@ -44,8 +44,5 @@ public class AirQualityController {
         List<Anomaly> anomalies = airQualityService.getAnomalies(startTime, endTime);
         return ResponseEntity.ok(anomalies);
     }
-    @GetMapping("/hello")
-    public String hello() {
-        return "Hello, world!";
-    }
+
 }
