@@ -1,11 +1,13 @@
 package com.airquality.airquality_monitoring.service;
 
+import com.airquality.airquality_monitoring.controller.WebSocketController;
 import com.airquality.airquality_monitoring.model.AirQualityRecord;
 import com.airquality.airquality_monitoring.model.Anomaly;
 import com.airquality.airquality_monitoring.repository.AnomalyRepository;
 import com.airquality.airquality_monitoring.config.ThresholdSettings;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.socket.TextMessage;
 
 import java.time.LocalDateTime;
 
@@ -13,6 +15,7 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class AnomalyDetectionService {
 
+    private final WebSocketController webSocketController;
     private final AnomalyRepository anomalyRepository;
     private final ThresholdSettings thresholdSettings;
 
@@ -36,6 +39,8 @@ public class AnomalyDetectionService {
             anomaly.setDetectedAt(LocalDateTime.now());
             anomaly.setMessageId(record.getMessageId());
             anomalyRepository.save(anomaly);
+            webSocketController.sendAnomaly(anomaly);
         }
     }
+
 }
