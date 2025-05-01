@@ -25,7 +25,6 @@ public class AirQualityController {
         this.airQualityService = airQualityService;
         this.kafkaProducerService = kafkaProducerService;
     }
-
     // Veri kaydetme — manuel ve otomatik script'ler için
     @PostMapping
     public ResponseEntity<AirQualityRecord> saveAirQuality(@RequestBody AirQualityRequest request) {
@@ -46,6 +45,15 @@ public class AirQualityController {
             @RequestParam double longitude
     ) {
         List<AirQualityResponse> data = airQualityService.getAirQualityDataByLocation(latitude, longitude);
+        return ResponseEntity.ok(data);
+    }
+
+    @GetMapping("/findNearbyRecords")
+    public ResponseEntity<List<AirQualityResponse>> findNearbyRecords(
+            @RequestParam double latitude,
+            @RequestParam double longitude
+    ) {
+        List<AirQualityResponse> data = airQualityService.findNearbyRecords(latitude, longitude);
         return ResponseEntity.ok(data);
     }
 

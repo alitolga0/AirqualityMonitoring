@@ -53,6 +53,11 @@ public class AirQualityService {
         return records.stream().map(this::convertToResponse).collect(Collectors.toList());
     }
 
+    public List<AirQualityResponse> findNearbyRecords(double latitude, double longitude) {
+        List<AirQualityRecord> records = airQualityRepository.findNearbyRecords(latitude, longitude);
+        return records.stream().map(this::convertToResponse).collect(Collectors.toList());
+    }
+
     // Anomali listesi (isteğe bağlı tarih aralığı)
     public List<Anomaly> getAnomalies(String startTime, String endTime) {
         if (startTime != null && endTime != null) {
