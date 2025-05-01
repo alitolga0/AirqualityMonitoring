@@ -205,6 +205,44 @@ airquality-monitoring/
 
 ---
 
+## 🧯 Sorun Giderme Rehberi
+
+Docker servisleri başlatılamıyorsa
+docker ps -a komutu ile hangi servisin hata verdiğini kontrol edin.
+
+Kafka başlatılamıyorsa port çakışması veya ağ hatası olabilir.
+
+Sırasıyla aşağıdaki komutları tekrardan çalıştırırn.
+
+```
+- docker compose down --volume
+- docker-compose up --build
+
+```
+
+---
+
+## 🧠Önyüz Ekran Görüntüleri
+
+![image](https://github.com/user-attachments/assets/0167aa4d-35dd-4ac2-8720-9897380ae4cd)
+
+![image](https://github.com/user-attachments/assets/ee31156f-4b96-4208-ade3-4590041e47f6)
+
+![image](https://github.com/user-attachments/assets/f47bc0b3-f0d0-4b39-8d42-6c62151e0927)
+
+
+![image](https://github.com/user-attachments/assets/a03b5b4b-62e2-489c-bdb1-022140a4d946)
+
+![image](https://github.com/user-attachments/assets/8945df2d-f875-461f-a31b-0188b97d1941)
+
+
+
+
+
+
+
+
+---
 ## 🧠 Katkıda Bulunmak
 
 Pull request’ler her zaman açıktır. Büyük değişiklikler için lütfen önce neyi değiştirmek istediğinizi tartışmak üzere bir issue açın.
