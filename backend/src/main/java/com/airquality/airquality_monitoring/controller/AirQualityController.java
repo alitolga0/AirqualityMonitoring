@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/airquality")
@@ -28,6 +29,7 @@ public class AirQualityController {
     // Veri kaydetme — manuel ve otomatik script'ler için
     @PostMapping
     public ResponseEntity<AirQualityRecord> saveAirQuality(@RequestBody AirQualityRequest request) {
+        request.setMessageId(UUID.randomUUID());
         AirQualityRecord savedRecord = airQualityService.saveAirQualityData(request);
         return ResponseEntity.ok(savedRecord);
     }
