@@ -23,7 +23,7 @@ Tüm sistem aşağıdaki servislerden oluşmaktadır:
 | Servis      | Açıklama                                 | Port         |
 |-------------|-------------------------------------------|--------------|
 | `app`       | Spring Boot backend uygulaması           | `8080`       |
-| `frontend`  | React frontend uygulaması                | `3000`       |
+| `frontend`  | Vue frontend uygulaması                | `3000`       |
 | `db`        | PostgreSQL veritabanı                    | `5432`       |
 | `zookeeper` | Kafka'nın bağımlılığı                    | `2181`       |
 | `kafka`     | Apache Kafka mesaj kuyruğu               | `9092`, `29092` |
