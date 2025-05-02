@@ -190,7 +190,7 @@ airquality-monitoring/
 │   │   └── manual-input.sh
 │   └── (Spring Boot Kaynakları)
 ├── frontend/
-│   └── (React kaynakları)
+│   └── (Vue kaynakları)
 ├── docker-compose.yml
 └── README.md
 ```
