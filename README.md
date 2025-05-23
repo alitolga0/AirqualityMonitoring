@@ -52,7 +52,7 @@ docker-compose up --build
 
 4. Sistem aşağıdaki adreslerde aktif olacaktır:
    - **Swagger (API Dokümantasyonu):** [http://localhost:8080/swagger-ui/index.html#/](http://localhost:8080/swagger-ui/index.html#/)
-   - **Frontend (React Uygulaması):** [http://localhost:3000](http://localhost:3000)
+   - **Frontend (Vue Uygulaması):** [http://localhost:3000](http://localhost:3000)
 
 ---
 
